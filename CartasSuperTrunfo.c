@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-int main()
-{
+int main(){
+
     char estado, carta[4], cidade[50];
-    unsigned long int populacao;
+    unsigned long int populacao; // população dividido pela área de cidade
     float area, pib;
     int pontos;
 
@@ -12,12 +12,7 @@ int main()
     float area1, pib1;
     int pontos1;
 
-
-    printf("Digite o Estado: \n");
-    scanf(" %c", &estado);
-
-    printf("Código da Carta: \n");
-    scanf("%s", &carta);
+    int opcao, opcao1;
 
     printf("Nome da Cidade: \n");
     scanf("%s", &cidade);
@@ -34,13 +29,7 @@ int main()
     printf("Número de Pontos Turísticos: \n");
     scanf("%d", &pontos);
 
-    printf("\nDigite o Estado: \n");
-    scanf(" %c", &estado1);
-
-    printf("Código da Carta: \n");
-    scanf("%s", &carta1);
-
-    printf("Nome da Cidade: \n");
+    printf("\nNome da Cidade: \n");
     scanf("%s", &cidade1);
 
     printf("População: \n");
@@ -55,51 +44,140 @@ int main()
     printf("Número de Pontos Turísticos: \n");
     scanf("%d", &pontos1);
 
-    float densidade    =  (float) populacao / area;
-    float pibPerCapita =  (float) (pib * 1000000000) / populacao;
+    float densidade1 = (area > 0) ? (float)populacao / area : 0;
+    float densidade2 = (area1 > 0) ? (float)populacao1 / area1 : 0;
 
-    float densidade1    = (float) populacao1 / area1;
-    float pibPerCapita1 = (float) (pib1 * 1000000000) / (float) populacao1;
+    printf("\n--- Menu de interação ---\n");
+    printf("1. População\n");
+    printf("2. Área\n");
+    printf("3. PIB\n");
+    printf("4. Número de Pontos Turísticos\n");
+    printf("5. Densidade Demográfica\n");
+    printf("Escolha uma das opções: \n");
+    scanf("%d", &opcao);
 
-    float superpoder = populacao + densidade + pibPerCapita + pontos;
-    float superpoder1 = populacao1 + densidade1 + pibPerCapita1 + pontos1;
+    if(opcao < 1 || opcao > 5) {
+        printf("Opção inválida. Por favor, escolha uma opção entre 1 e 5.\n");
+        return 0;
+    }
 
-    printf("\ncarta 1:\n");
-    printf("\nEstado: %c\n", estado);
-    printf("Código da Carta: %s\n", carta);
-    printf("Nome da Cidade: %s\n", cidade);
-    printf("População: %lu\n", populacao);
-    printf("Área: %.2f km²\n", area);
-    printf("PIB: %.2f bilhões de reais\n", pib);
-    printf("Número de Pontos Turísticos: %d\n", pontos);
-    printf("Densidade populacional: %.2f habitantes/km²\n", densidade);
-    printf("PIB per capita: %.2f mil reais\n", pibPerCapita);
-    printf("Super Poder: %.2f\n", superpoder);
+    printf("\n--- escolha o segundo atributo (deve ser diferente do primeiro) ---\n");
+    printf("1. População\n");
+    printf("2. Área\n");
+    printf("3. PIB\n");
+    printf("4. Número de Pontos Turísticos\n");
+    printf("5. Densidade Demográfica\n");
+    printf("Escolha uma das opções: \n");
+    scanf("%d", &opcao1);
 
-    printf("\ncarta 2:\n");
-    printf("\nEstado: %c\n", estado1);
-    printf("Código da Carta: %s\n", carta1);
-    printf("Nome da Cidade: %s\n", cidade1);
-    printf("População: %lu\n", populacao1);
-    printf("Área: %.2f km²\n", area1);
-    printf("PIB: %.2f bilhões de Reais\n", pib1);
-    printf("Número de Pontos Turísticos: %d\n", pontos1);
-    printf("Densidade populacional: %.2f habitantes/km²\n", densidade1);
-    printf("PIB per capita: %.2f mil reais\n", pibPerCapita1);
-    printf("Super Poder: %.2f\n", superpoder1);
+    if (opcao == opcao1) {
+        printf("Os atributos devem ser diferentes. Tente novamente.\n");
+        return 0;
+    }
 
+    if(opcao1 < 1 || opcao1 > 5) {
+        printf("Opção inválida. Por favor, escolha uma opção entre 1 e 5.\n");
+        return 0;
+    }
 
-    // comparação dos atributos vencedores
+    printf("\n=== RESULTADO DA RODADA=== \n");   
+    
+    printf("\npaíses em disputa: %s e %s\n\n", cidade, cidade1);
+    printf("--- resultado dos atributos ---\n");
 
-    printf("\ncomparação de cartas:\n");
-    printf("População: Carta %d venceu\n", 2 - (populacao > populacao1));
-    printf("Área: carta %d venceu \n", 2 - (area > area1));
-    printf("PIB: carta %d venceu \n", 2 - (pib > pib1));
-    printf("Pontos Turísticos: carta %d venceu \n", 2 - (pontos > pontos1));
-    printf("Densidade Populacional: carta %d venceu \n", 2 - (densidade < densidade1));
-    printf("PIB per Capita: carta %d venceu \n", 2 - (pibPerCapita > pibPerCapita1));
-    printf("Super Poder: carta %d venceu \n", 2 - (superpoder > superpoder1));
+    switch(opcao){
+        case 1:
+        if (populacao > populacao1){
+            printf("\nA carta 1 venceu com a população de %lu habitantes\n", populacao);
+        } else if (populacao == populacao1) {
+            printf("\nEmpate com a população de %lu habitantes\n", populacao);
+        } else {
+            printf("\nA carta 2 venceu com a população de %lu habitantes\n", populacao1);
+        }
+        break;
+        case 2:
+        if (area > area1){
+            printf("\nA carta 1 venceu com a área de %.2f km²\n", area);
+        } else if (area == area1) {
+            printf("\nEmpate com a área de %.2f km²\n", area);
+        } else {
+            printf("\nA carta 2 venceu com a área de %.2f km²\n", area1);
+        }
+        break;
+        case 3:
+        if (pib > pib1){
+            printf("\nA carta 1 venceu com o PIB de %.2f\n", pib);
+        } else if (pib == pib1) {
+            printf("\nEmpate com o PIB de %.2f\n", pib);
+        } else {
+            printf("\nA carta 2 venceu com o PIB de %.2f\n", pib1);
+        }
+        break;
+        case 4:
+        if (pontos > pontos1){
+            printf("\nA carta 1 venceu com %d pontos turísticos\n", pontos);
+        } else if (pontos == pontos1) {
+            printf("\nEmpate com %d pontos turísticos\n", pontos);
+        } else {
+            printf("\nA carta 2 venceu com %d pontos turísticos\n", pontos1);
+        }
+        break;
+        case 5:
+        if (densidade1 > densidade2){
+            printf("\nA carta 1 venceu com uma densidade de %.2f habitantes/km²\n", densidade1);
+        } else if (densidade1 == densidade2) {
+            printf("\nEmpate com uma densidade de %.2f habitantes/km²\n", densidade1);
+        } else {
+            printf("\nA carta 2 venceu com uma densidade de %.2f habitantes/km²\n", densidade2);
+        }
+        break;
+    }
 
-
-    return 0;
+        switch(opcao1){
+        case 1:
+        if (populacao > populacao1){
+            printf("\nA carta 1 venceu com a população de %lu habitantes\n", populacao);
+        } else if (populacao == populacao1) {
+            printf("\nEmpate com a população de %lu habitantes\n", populacao);
+        } else {
+            printf("\nA carta 2 venceu com a população de %lu habitantes\n", populacao1);
+        }
+        break;
+        case 2:
+        if (area > area1){
+            printf("\nA carta 1 venceu com a área de %.2f km²\n", area);
+        } else if (area == area1) {
+            printf("\nEmpate com a área de %.2f km²\n", area);
+        } else {
+            printf("\nA carta 2 venceu com a área de %.2f km²\n", area1);
+        }
+        break;
+        case 3:
+        if (pib > pib1){
+            printf("\nA carta 1 venceu com o PIB de %.2f\n", pib);
+        } else if (pib == pib1) {
+            printf("\nEmpate com o PIB de %.2f\n", pib);
+        } else {
+            printf("\nA carta 2 venceu com o PIB de %.2f\n", pib1);
+        }
+        break;
+        case 4:
+        if (pontos > pontos1){
+            printf("\nA carta 1 venceu com %d pontos turísticos\n", pontos);
+        } else if (pontos == pontos1) {
+            printf("\nEmpate com %d pontos turísticos\n", pontos);
+        } else {
+            printf("\nA carta 2 venceu com %d pontos turísticos\n", pontos1);
+        }
+        break;
+        case 5:
+        if (densidade1 > densidade2){
+            printf("\nA carta 1 venceu com uma densidade de %.2f habitantes/km²\n", densidade1);
+        } else if (densidade1 == densidade2) {
+            printf("\nEmpate com uma densidade de %.2f habitantes/km²\n", densidade1);
+        } else {
+            printf("\nA carta 2 venceu com uma densidade de %.2f habitantes/km²\n", densidade2);
+        }
+        break;
+        }
 }
